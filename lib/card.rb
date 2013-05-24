@@ -1,11 +1,20 @@
 class Card
-  SYMBOLS = [:hearts, :diamonds, :clubs, :spades]
+  SUITS = {
+    :hearts => :red,
+    :diamonds => :red,
+    :clubs => :black,
+    :spades => :black
+  }
 
-  attr_reader :value, :symbol
+  attr_reader :value, :suit
 
-  def initialize(value, symbol)
+  def initialize(value, suit)
     self.value = value
-    self.symbol = symbol
+    self.suit = suit
+  end
+
+  def color
+    SUITS[@suit]
   end
 
   private
@@ -18,12 +27,12 @@ class Card
     @value = val
   end
 
-  def symbol=(symbol)
-    unless SYMBOLS.include? symbol
-      raise ArgumentError.new("#{symbol} is not a valid symbol")
+  def suit=(suit)
+    unless SUITS.keys.include? suit
+      raise ArgumentError.new("#{suit} is not a valid suit")
     end
 
-    @symbol = symbol
+    @suit = suit
   end
 
 

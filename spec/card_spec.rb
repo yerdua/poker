@@ -9,12 +9,12 @@ describe "Card" do
       card.value.should == 6
     end
 
-    it "has the correct symbol" do
-      card.symbol.should == :clubs
+    it "has the correct suit" do
+      card.suit.should == :clubs
     end
 
     it "assigns colors correctly" do
-      card.color.should == :red
+      card.color.should == :black
     end
   end
 
@@ -22,5 +22,7 @@ describe "Card" do
     expect { Card.new(20, :diamonds) }.to raise_error(ArgumentError)
   end
 
-  it "can't be initialized with an invalid symbol"
+  it "can't be initialized with an invalid symbol" do
+    expect { Card.new(10, :nonsense) }.to raise_error(ArgumentError)
+  end
 end
