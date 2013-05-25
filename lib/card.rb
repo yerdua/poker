@@ -20,7 +20,7 @@ class Card
   private
 
   def value=(val)
-    if val > 13 || val < 1
+    unless val.between?(1,13)
       raise ArgumentError.new("Card cannot have a value of #{val}")
     end
 
