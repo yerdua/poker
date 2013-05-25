@@ -1,4 +1,6 @@
 class Card
+  include Comparable
+  
   SUITS = {
     :hearts => :red,
     :diamonds => :red,
@@ -15,6 +17,10 @@ class Card
 
   def color
     SUITS[@suit]
+  end
+  
+  def <=>(other_card)
+    @value <=> other_card.value
   end
 
   def ==(other_card)
