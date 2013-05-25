@@ -8,7 +8,6 @@ class Hand
   end
 
   def discard(*discards)
-    p discards
     unless discards.length.between?(0,3)
       raise InvalidDiscardError.new("Can't discard #{cards.length} cards")
     end
