@@ -37,6 +37,22 @@ class Hand
     raise NotImplementedError
   end
   
+  def values
+    values = Hash.new(0)
+    @cards.each { |c| values[c.value] +=1 }
+    values
+  end
+  
+  def suits
+    suits = Hash.new(0)
+    @cards.each { |c| suits[c.suit] +=1 }
+    suits
+  end
+  
+  def highest_card
+    @cards.max
+  end
+  
   def straight?
     sorted = @cards.sort
     (1...sorted.length).each do |i|
@@ -47,19 +63,28 @@ class Hand
   end
   
   def flush?
-    @cards.all? { |c| c.suit == @cards.first.suit }
+    suits.count == 1 && suits.has_value?(5)
   end
   
   def full_house?
-    sorted = @cards.sort
-    sorted[0].value == sorted[1].value &&
-      sorted[3].value == sorted[4].value &&
-      (sorted[2].value == sorted[1].value || 
-      sorted[2].value == sorted[3].value)
+    vals = values
+    vals.count == 2 && vals.has_value?(2) && vals.has_value?(3)
   end
   
   def four_of_a_kind?
-    
+    values.has_value?(4)
+  end
+  
+  def three_of_a_kind?
+    values.has_value?(3)
+  end
+  
+  def one_pair?
+    values.has_value(2)
+  end
+  
+  def two_pairs?
+    values.values.count(2) == 2
   end
 
 end
