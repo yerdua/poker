@@ -17,6 +17,10 @@ class Card
     SUITS[@suit]
   end
 
+  def ==(other_card)
+    @value == other_card.value && @suit == other_card.suit
+  end
+
   private
 
   def value=(val)
