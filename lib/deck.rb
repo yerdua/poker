@@ -20,6 +20,7 @@ class Deck
     if number > count
       raise OutOfCardsError.new("Can't deal more cards than exist in the deck")
     end
+
     deal = []
     number.times { deal << @cards.shift }
     deal
