@@ -29,6 +29,29 @@ describe "Hand" do
         subject.has_card?(card).should be_false
       end
     end
+    
+    describe "#add_cards" do
+      it "prevents adding cards to a full hand" do
+        expect { hand.add_cards(deck.deal(1)) }.to raise_error(TooManyCardsError)
+      end
+    end
+    
+  end
+  
+  context "With an empty hand" do
+    let(:deck) { Deck.new }
+    subject(:hand) { Hand.new }
+    
+    describe "#add_cards" do
+      it "adds 5 cards" do
+        hand.add_cards(deck.deal(5))
+        hand.cards.count.should == 5
+      end
+      
+      it "prevents adding more than 5 cards" do
+        expect { hand.add_cards(deck.deal(6)) }.to raise_error(TooManyCardsError)
+      end
+    end
   end
   
   describe "#flush?" do 

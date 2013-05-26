@@ -24,6 +24,14 @@ class Hand
     end
 
   end
+  
+  def add_cards(cards)
+    if @cards.count + cards.count < 6
+      @cards += cards
+    else
+      raise TooManyCardsError.new("Can't have more than 5 cards")
+    end
+  end
 
   def has_card?(card)
     @cards.any? { |c| c == card }
@@ -87,6 +95,9 @@ class Hand
     values.values.count(2) == 2
   end
 
+end
+
+class TooManyCardsError < RuntimeError
 end
 
 class InvalidDiscardError < RuntimeError
